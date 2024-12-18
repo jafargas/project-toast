@@ -12,10 +12,10 @@ const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 function ToastPlayground() {
   const [message, setMessage] = React.useState("");
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
-  const { toasts, insertToast, deleteToast } = React.useContext(ToastContext);
+  const { createToast } = React.useContext(ToastContext);
 
   const handleSubmit = (e) => {
-    insertToast(crypto.randomUUID(), variant, message);
+    createToast(variant, message);
     setMessage("");
     setVariant("notice");
     e.preventDefault();
@@ -28,7 +28,7 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <ToastShelf toasts={toasts} handleDismiss={deleteToast} timeout={4000} />
+      <ToastShelf timeout={4000} />
 
       <form className={styles.controlsWrapper} onSubmit={handleSubmit}>
         <div className={styles.row}>
